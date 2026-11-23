@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#087f5b">
 <meta name="description" content="পরিবারের আয়, ব্যয় ও বাজেট ব্যবস্থাপনা">
 <link rel="manifest" href="./manifest.json">
@@ -10,121 +11,80 @@
 
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#f3f6f8;color:#172b3a;
- font-family:Arial,"Noto Sans Bengali",sans-serif;
-}
+body{margin:0;background:#f3f6f8;color:#172b3a;font-family:Arial,"Noto Sans Bengali",sans-serif}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:600px;margin:auto;min-height:100vh;padding-bottom:85px}
-.header{
- background:linear-gradient(135deg,#087f5b,#10a46f);
- color:white;padding:23px 18px 25px;
- border-radius:0 0 24px 24px;
-}
+.app{max-width:600px;margin:auto;min-height:100vh;padding-bottom:90px}
+.header{background:linear-gradient(135deg,#087f5b,#10a46f);color:white;padding:22px 18px;border-radius:0 0 24px 24px}
 .header-top{display:flex;justify-content:space-between;align-items:center}
 .brand{display:flex;gap:12px;align-items:center}
 .logo{font-size:35px}
 .header h1{font-size:21px;margin:0}
-.header p{font-size:12px;margin:5px 0 0;opacity:.9}
+.header p{font-size:12px;margin:5px 0 0}
 .header button{background:#ffffff22;border:0;color:white;border-radius:12px;padding:10px}
 .content{padding:15px}
-.card{
- background:white;border-radius:17px;padding:16px;
- margin-bottom:13px;box-shadow:0 3px 12px #00000008;
-}
-.hero{
- background:linear-gradient(135deg,#087f5b,#10a46f);
- color:white;padding:20px;border-radius:20px;margin-bottom:14px;
-}
-.hero small{opacity:.9}
+.card{background:white;border-radius:17px;padding:16px;margin-bottom:13px;box-shadow:0 3px 12px #00000008}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:17px 0 12px;font-size:17px;font-weight:bold}
+.section-title small{font-size:12px;color:#087f5b}
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.month{border:1px solid #dce5ed;background:white;padding:12px 5px;border-radius:12px}
+.month.active{background:#087f5b;color:white;border-color:#087f5b}
+.hero{background:linear-gradient(135deg,#087f5b,#10a46f);color:white;padding:20px;border-radius:20px;margin-bottom:14px}
 .hero h2{font-size:29px;margin:8px 0}
+.hero small{opacity:.9}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{padding:16px;border-radius:17px;min-height:100px}
+.stat{padding:16px;border-radius:17px;min-height:95px}
 .stat small{display:block;font-size:13px;margin-bottom:8px}
-.stat strong{font-size:20px}
+.stat strong{font-size:19px}
 .green{background:#e0f7ed;color:#087f5b}
 .red{background:#ffe9e9;color:#c0392b}
 .blue{background:#e8f0ff;color:#275ca8}
 .orange{background:#fff1dc;color:#a45a08}
-.section-title{
- display:flex;justify-content:space-between;align-items:center;
- margin:17px 0 12px;font-size:17px;font-weight:bold
-}
-.section-title small{font-size:12px;color:#087f5b}
-.months{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.month{
- border:1px solid #dce5ed;background:white;padding:12px 5px;
- border-radius:12px;text-align:center;font-size:14px;
-}
-.month.active{background:#087f5b;color:white;border-color:#087f5b}
-.transaction{
- display:flex;align-items:center;gap:12px;padding:13px 0;
- border-bottom:1px solid #edf1f4;
-}
+.transaction{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf1f4}
 .transaction:last-child{border-bottom:0}
-.tx-icon{
- width:43px;height:43px;border-radius:13px;background:#eef5f2;
- display:flex;align-items:center;justify-content:center;font-size:20px;
-}
+.tx-icon{width:43px;height:43px;border-radius:13px;background:#eef5f2;display:flex;align-items:center;justify-content:center;font-size:20px}
 .tx-info{flex:1;min-width:0}
 .tx-info strong{display:block;font-size:14px}
-.tx-info small{color:#72808c;font-size:12px}
-.tx-amount{text-align:right;font-weight:bold}
+.tx-info small{display:block;color:#72808c;font-size:12px;margin-top:3px}
+.tx-amount{text-align:right;font-weight:bold;font-size:13px}
 .tx-amount.expense{color:#d64545}
 .tx-amount.income{color:#087f5b}
-.actions{display:flex;gap:6px;margin-top:5px}
-.actions button{
- border:0;background:#edf2f6;padding:5px 8px;border-radius:7px;font-size:12px
-}
-.add-btn{
- position:fixed;bottom:75px;right:max(20px,calc(50% - 280px));
- width:58px;height:58px;border:0;border-radius:50%;
- background:#087f5b;color:white;font-size:29px;
- box-shadow:0 5px 16px #087f5b44;
-}
-.nav{
- position:fixed;bottom:0;left:0;right:0;background:white;
- border-top:1px solid #e5eaf0;display:flex;justify-content:center;
- z-index:5;
-}
+.actions{display:flex;gap:6px;margin-top:7px}
+.actions button,.small-btn{border:0;background:#edf2f6;padding:7px 9px;border-radius:8px;font-size:12px}
+.add-btn{position:fixed;bottom:76px;right:max(20px,calc(50% - 280px));width:58px;height:58px;border:0;border-radius:50%;background:#087f5b;color:white;font-size:29px;box-shadow:0 5px 16px #087f5b44;z-index:4}
+.nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5eaf0;display:flex;justify-content:center;z-index:5}
 .nav-inner{width:100%;max-width:600px;display:flex}
-.nav button{
- flex:1;border:0;background:white;padding:12px 3px 10px;
- color:#75818d;font-size:11px;
-}
-.nav button span{display:block;font-size:21px;margin-bottom:4px}
+.nav button{flex:1;border:0;background:white;padding:10px 2px;color:#75818d;font-size:11px}
+.nav button span{display:block;font-size:20px;margin-bottom:4px}
 .nav button.active{color:#087f5b;font-weight:bold}
-.modal{
- display:none;position:fixed;inset:0;background:#0007;z-index:10;
- align-items:flex-end;justify-content:center;
-}
+.modal{display:none;position:fixed;inset:0;background:#0007;z-index:10;align-items:flex-end;justify-content:center}
 .modal.show{display:flex}
-.modal-box{
- background:white;width:100%;max-width:600px;
- border-radius:24px 24px 0 0;padding:22px;
- max-height:90vh;overflow:auto;
-}
-.modal-box h2{margin:0 0 20px}
+.modal-box{background:white;width:100%;max-width:600px;border-radius:24px 24px 0 0;padding:22px;max-height:90vh;overflow:auto}
+.modal-box h2{margin:0 0 18px}
 .type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.type-toggle button{
- padding:13px;border:1px solid #dce5ed;border-radius:12px;background:white;
-}
+.type-toggle button{padding:13px;border:1px solid #dce5ed;border-radius:12px;background:white}
 .type-toggle button.active{background:#087f5b;color:white}
 label{display:block;font-size:14px;font-weight:bold;margin:14px 0 6px}
-input,select{
- width:100%;padding:13px;border:1px solid #d6e0e8;
- border-radius:12px;background:#f8fafc;color:#172b3a;
-}
-.save{
- width:100%;background:#087f5b;color:white;border:0;border-radius:13px;
- padding:15px;margin-top:20px;font-weight:bold;
-}
-.cancel{
- width:100%;background:#edf2f6;border:0;border-radius:13px;
- padding:13px;margin-top:10px;
-}
+input,select{width:100%;padding:13px;border:1px solid #d6e0e8;border-radius:12px;background:#f8fafc;color:#172b3a}
+.save{width:100%;background:#087f5b;color:white;border:0;border-radius:13px;padding:15px;margin-top:20px;font-weight:bold}
+.cancel{width:100%;background:#edf2f6;border:0;border-radius:13px;padding:13px;margin-top:10px}
 .empty{text-align:center;padding:30px 10px;color:#75818d}
+.page{display:none}
+.page.active{display:block}
+.budget-item{padding:14px 0;border-bottom:1px solid #edf1f4}
+.budget-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.budget-name{font-weight:bold;font-size:14px}
+.budget-numbers{font-size:12px;color:#657582;margin-top:7px}
+.progress{height:9px;background:#edf1f4;border-radius:20px;margin-top:9px;overflow:hidden}
+.progress-bar{height:100%;background:#10a46f;border-radius:20px}
+.progress-bar.over{background:#e34d4d}
+.category-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #edf1f4;gap:8px}
+.category-row:last-child{border-bottom:0}
+.category-actions{display:flex;gap:5px}
+.category-actions button{border:0;border-radius:8px;padding:7px 9px;background:#edf2f6;font-size:12px}
+.primary-btn{width:100%;border:0;border-radius:12px;background:#087f5b;color:white;padding:13px;font-weight:bold;margin-bottom:12px}
+.secondary-btn{border:0;border-radius:10px;padding:10px;background:#e8f0ff;color:#275ca8}
+.warning{color:#c0392b;font-size:12px;font-weight:bold;margin-top:6px}
 </style>
 </head>
 
@@ -146,46 +106,56 @@ input,select{
 
 <div class="content">
 
-<div class="section-title">
- <span>📅 মাস নির্বাচন</span>
- <small>২০২৭ সাল</small>
+<div id="homePage" class="page active">
+ <div class="section-title"><span>📅 মাস নির্বাচন</span><small>২০২৭ সাল</small></div>
+ <div class="months" id="months"></div>
+
+ <div class="section-title">📊 মাসিক হিসাব</div>
+ <div class="hero">
+  <small id="selectedMonth">জানুয়ারি</small>
+  <h2 id="balance">৳ ০</h2>
+  <small>মাসের অবশিষ্ট টাকা</small>
+ </div>
+
+ <div class="grid">
+  <div class="stat green"><small>💰 মোট আয়</small><strong id="income">৳ ০</strong></div>
+  <div class="stat red"><small>🛒 মোট ব্যয়</small><strong id="expense">৳ ০</strong></div>
+  <div class="stat blue"><small>📥 লেনদেন</small><strong id="count">০ টি</strong></div>
+  <div class="stat orange"><small>📆 মাস</small><strong id="monthLabel">জানুয়ারি</strong></div>
+ </div>
+
+ <div class="section-title"><span>📋 লেনদেন তালিকা</span><small id="txCount">০ টি</small></div>
+ <div class="card" id="transactionList"></div>
 </div>
 
-<div class="months" id="months"></div>
-
-<div class="section-title"><span>📊 মাসিক হিসাব</span></div>
-
-<div class="hero">
- <small id="selectedMonth">জানুয়ারি</small>
- <h2 id="balance">৳ ০</h2>
- <small>মাসের অবশিষ্ট টাকা</small>
-</div>
-
-<div class="grid">
- <div class="stat green">
-  <small>💰 মোট আয়</small>
-  <strong id="income">৳ ০</strong>
+<div id="categoryPage" class="page">
+ <div class="section-title">🗂️ ক্যাটাগরি ব্যবস্থাপনা</div>
+ <div class="card">
+  <p style="font-size:13px;color:#657582">এখান থেকে আপনার প্রয়োজন অনুযায়ী আয় ও ব্যয়ের ক্যাটাগরি তৈরি, পরিবর্তন ও মুছে ফেলতে পারবেন।</p>
+  <button class="primary-btn" onclick="openCategoryModal()">＋ নতুন ক্যাটাগরি তৈরি</button>
+  <div class="type-toggle">
+   <button id="catIncomeTab" class="active" onclick="showCategoryType('income')">💰 আয়ের ক্যাটাগরি</button>
+   <button id="catExpenseTab" onclick="showCategoryType('expense')">🛒 ব্যয়ের ক্যাটাগরি</button>
+  </div>
+  <div id="categoryList" style="margin-top:12px"></div>
  </div>
- <div class="stat red">
-  <small>🛒 মোট ব্যয়</small>
-  <strong id="expense">৳ ০</strong>
- </div>
- <div class="stat blue">
-  <small>📥 লেনদেন</small>
-  <strong id="count">০ টি</strong>
- </div>
- <div class="stat orange">
-  <small>📆 মাস</small>
-  <strong id="monthLabel">জানুয়ারি</strong>
+
+ <div class="section-title">🎯 মাসিক ক্যাটাগরি বাজেট</div>
+ <div class="card">
+  <p style="font-size:13px;color:#657582">নির্বাচিত মাসের প্রতিটি ব্যয় ক্যাটাগরির জন্য বাজেট নির্ধারণ করুন। মাস পরিবর্তন করলে সেই মাসের বাজেট দেখা যাবে।</p>
+  <div id="budgetList"></div>
  </div>
 </div>
 
-<div class="section-title">
- <span>📋 লেনদেন তালিকা</span>
- <small id="txCount">০ টি</small>
+<div id="backupPage" class="page">
+ <div class="section-title">💾 ডেটা ব্যাকআপ</div>
+ <div class="card">
+  <h3>আপনার হিসাব নিরাপদ রাখুন</h3>
+  <p style="font-size:13px;color:#657582">ব্যাকআপ ডাউনলোড করলে আয়, ব্যয়, ক্যাটাগরি ও বাজেটের তথ্য একটি JSON ফাইলে সংরক্ষিত হবে।</p>
+  <button class="primary-btn" onclick="exportBackup()">⬇️ সম্পূর্ণ ব্যাকআপ ডাউনলোড</button>
+  <p style="font-size:12px;color:#c0392b">মনে রাখবেন: এই অ্যাপের তথ্য বর্তমানে এই ডিভাইসের ব্রাউজারে সংরক্ষিত হয়। নিয়মিত ব্যাকআপ রাখুন।</p>
+ </div>
 </div>
-
-<div class="card" id="transactionList"></div>
 
 </div>
 </div>
@@ -194,58 +164,88 @@ input,select{
 
 <div class="nav">
  <div class="nav-inner">
-  <button class="active" onclick="navAction('home')"><span>🏠</span>হোম</button>
-  <button onclick="navAction('transactions')"><span>📋</span>লেনদেন</button>
+  <button id="navHome" class="active" onclick="navAction('home')"><span>🏠</span>হোম</button>
+  <button id="navCategories" onclick="navAction('categories')"><span>🗂️</span>ক্যাটাগরি</button>
   <button onclick="openModal()"><span>➕</span>যোগ করুন</button>
-  <button onclick="navAction('backup')"><span>💾</span>ব্যাকআপ</button>
+  <button id="navBackup" onclick="navAction('backup')"><span>💾</span>ব্যাকআপ</button>
  </div>
 </div>
 
+<!-- লেনদেন মডাল -->
 <div class="modal" id="modal">
-<div class="modal-box">
-<h2 id="modalTitle">নতুন লেনদেন</h2>
-
-<div class="type-toggle">
- <button id="incomeBtn" onclick="setType('income')">💰 জমা / আয়</button>
- <button id="expenseBtn" onclick="setType('expense')">🛒 খরচ</button>
+ <div class="modal-box">
+  <h2 id="modalTitle">নতুন লেনদেন</h2>
+  <div class="type-toggle">
+   <button id="incomeBtn" onclick="setType('income')">💰 জমা / আয়</button>
+   <button id="expenseBtn" onclick="setType('expense')">🛒 খরচ</button>
+  </div>
+  <label>তারিখ</label>
+  <input type="date" id="date" min="2027-01-01" max="2027-12-31">
+  <label>পণ্য / বিবরণ</label>
+  <input type="text" id="title" placeholder="যেমন: বাজার, বেতন">
+  <label>ক্যাটাগরি</label>
+  <select id="category"></select>
+  <label>পরিমাণ (টাকা)</label>
+  <input type="number" id="amount" placeholder="টাকার পরিমাণ" min="0" step="0.01">
+  <label>অতিরিক্ত বিবরণ</label>
+  <input type="text" id="note" placeholder="ঐচ্ছিক">
+  <button class="save" onclick="saveTransaction()">💾 সংরক্ষণ করুন</button>
+  <button class="cancel" onclick="closeModal()">বাতিল</button>
+ </div>
 </div>
 
-<label>তারিখ</label>
-<input type="date" id="date">
-
-<label>পণ্য / বিবরণ</label>
-<input type="text" id="title" placeholder="যেমন: বাজার, বেতন">
-
-<label>ক্যাটাগরি</label>
-<select id="category"></select>
-
-<label>পরিমাণ (টাকা)</label>
-<input type="number" id="amount" placeholder="টাকার পরিমাণ" min="0" step="0.01">
-
-<label>অতিরিক্ত বিবরণ</label>
-<input type="text" id="note" placeholder="ঐচ্ছিক">
-
-<button class="save" onclick="saveTransaction()">💾 সংরক্ষণ করুন</button>
-<button class="cancel" onclick="closeModal()">বাতিল</button>
+<!-- ক্যাটাগরি মডাল -->
+<div class="modal" id="categoryModal">
+ <div class="modal-box">
+  <h2 id="categoryModalTitle">নতুন ক্যাটাগরি</h2>
+  <label>ক্যাটাগরির ধরন</label>
+  <select id="newCategoryType">
+   <option value="income">আয়ের ক্যাটাগরি</option>
+   <option value="expense">ব্যয়ের ক্যাটাগরি</option>
+  </select>
+  <label>ক্যাটাগরির নাম</label>
+  <input id="newCategoryName" type="text" placeholder="যেমন: মোবাইল বিল">
+  <button class="save" onclick="saveCategory()">সংরক্ষণ করুন</button>
+  <button class="cancel" onclick="closeCategoryModal()">বাতিল</button>
+ </div>
 </div>
+
+<!-- বাজেট মডাল -->
+<div class="modal" id="budgetModal">
+ <div class="modal-box">
+  <h2>🎯 মাসিক বাজেট নির্ধারণ</h2>
+  <p id="budgetCategoryName" style="color:#657582"></p>
+  <label>বাজেটের পরিমাণ (টাকা)</label>
+  <input id="budgetAmount" type="number" min="0" step="0.01" placeholder="যেমন: ৫০০০">
+  <button class="save" onclick="saveBudget()">বাজেট সংরক্ষণ</button>
+  <button class="cancel" onclick="closeBudgetModal()">বাতিল</button>
+ </div>
 </div>
 
 <script>
-const months=[
- "জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন",
- "জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"
-];
+const months=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 
-const categories={
+const defaultCategories={
  income:["বেতন","ব্যবসা","অন্যান্য আয়","বোনাস","অন্যান্য"],
- expense:["খাদ্য","বাড়ি","যাতায়াত","বিদ্যুৎ-গ্যাস-পানি","চিকিৎসা",
- "শিক্ষা","পোশাক","ঋণ","অন্যান্য"]
+ expense:["খাদ্য","বাড়ি","যাতায়াত","বিদ্যুৎ-গ্যাস-পানি","চিকিৎসা","শিক্ষা","পোশাক","ঋণ","অন্যান্য"]
 };
 
+function loadJSON(key,fallback){
+ try{
+  const value=JSON.parse(localStorage.getItem(key));
+  return value===null?fallback:value;
+ }catch(e){return fallback;}
+}
+
+let transactions=loadJSON("sangsar_editable_2027",[]);
+let categories=loadJSON("sangsar_categories_2027",defaultCategories);
+let budgets=loadJSON("sangsar_budgets_2027",{});
 let selectedMonth=0;
 let transactionType="expense";
 let editingId=null;
-let transactions=JSON.parse(localStorage.getItem("sangsar_editable_2027")||"[]");
+let editingCategoryIndex=null;
+let categoryViewType="income";
+let activeBudgetCategory="";
 
 function money(n){
  return "৳ "+Number(n||0).toLocaleString("bn-BD");
@@ -253,6 +253,19 @@ function money(n){
 function bn(n){
  return Number(n||0).toLocaleString("bn-BD");
 }
+function escapeHTML(str){
+ return String(str||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+function persist(){
+ localStorage.setItem("sangsar_editable_2027",JSON.stringify(transactions));
+}
+function persistCategories(){
+ localStorage.setItem("sangsar_categories_2027",JSON.stringify(categories));
+}
+function persistBudgets(){
+ localStorage.setItem("sangsar_budgets_2027",JSON.stringify(budgets));
+}
+
 function renderMonths(){
  document.getElementById("months").innerHTML=months.map((m,i)=>
  `<button class="month ${i===selectedMonth?"active":""}" onclick="selectMonth(${i})">${m}</button>`
@@ -262,15 +275,19 @@ function selectMonth(i){
  selectedMonth=i;
  renderMonths();
  render();
+ if(document.getElementById("categoryPage").classList.contains("active"))renderBudgets();
 }
 function currentMonthTransactions(){
- return transactions.filter(t=>Number(t.date.split("-")[1])-1===selectedMonth);
+ return transactions.filter(t=>{
+  if(!t.date)return false;
+  const parts=t.date.split("-");
+  return parts[0]==="2027" && Number(parts[1])-1===selectedMonth;
+ });
 }
 function render(){
  const list=currentMonthTransactions();
  const inc=list.filter(t=>t.type==="income").reduce((s,t)=>s+Number(t.amount),0);
  const exp=list.filter(t=>t.type==="expense").reduce((s,t)=>s+Number(t.amount),0);
-
  document.getElementById("selectedMonth").textContent=months[selectedMonth]+" মাস";
  document.getElementById("monthLabel").textContent=months[selectedMonth];
  document.getElementById("income").textContent=money(inc);
@@ -284,13 +301,11 @@ function render(){
   box.innerHTML='<div class="empty">📝<br><br>এই মাসে কোনো লেনদেন নেই।<br>নিচের + বাটনে চাপ দিয়ে যোগ করুন।</div>';
   return;
  }
-
  list.sort((a,b)=>b.date.localeCompare(a.date));
  box.innerHTML=list.map(t=>{
   const isIncome=t.type==="income";
   const date=new Date(t.date+"T00:00:00").toLocaleDateString("bn-BD");
-  return `
-  <div class="transaction">
+  return `<div class="transaction">
    <div class="tx-icon">${isIncome?"💰":"🛒"}</div>
    <div class="tx-info">
     <strong>${escapeHTML(t.title)}</strong>
@@ -301,23 +316,17 @@ function render(){
      <button onclick="deleteTransaction('${t.id}')">🗑️ মুছুন</button>
     </div>
    </div>
-   <div class="tx-amount ${isIncome?"income":"expense"}">
-    ${isIncome?"+":"-"}${money(t.amount)}
-   </div>
+   <div class="tx-amount ${isIncome?"income":"expense"}">${isIncome?"+":"-"}${money(t.amount)}</div>
   </div>`;
  }).join("");
 }
-function escapeHTML(str){
- return String(str||"").replace(/[&<>"']/g,m=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[m]));
-}
+
 function setType(type){
  transactionType=type;
  document.getElementById("incomeBtn").classList.toggle("active",type==="income");
  document.getElementById("expenseBtn").classList.toggle("active",type==="expense");
- document.getElementById("category").innerHTML=
- categories[type].map(c=>`<option>${c}</option>`).join("");
+ const select=document.getElementById("category");
+ select.innerHTML=(categories[type]||[]).map(c=>`<option value="${escapeHTML(c)}">${escapeHTML(c)}</option>`).join("");
 }
 function openModal(){
  editingId=null;
@@ -325,8 +334,7 @@ function openModal(){
  document.getElementById("title").value="";
  document.getElementById("amount").value="";
  document.getElementById("note").value="";
- document.getElementById("date").value=
- `2027-${String(selectedMonth+1).padStart(2,"0")}-${String(new Date().getDate()).padStart(2,"0")}`;
+ document.getElementById("date").value=`2027-${String(selectedMonth+1).padStart(2,"0")}-01`;
  setType("expense");
  document.getElementById("modal").classList.add("show");
 }
@@ -339,15 +347,15 @@ function saveTransaction(){
  const date=document.getElementById("date").value;
  const category=document.getElementById("category").value;
  const note=document.getElementById("note").value.trim();
-
- if(!title||!amount||amount<=0||!date){
+ if(!title||!amount||amount<=0||!date||!category){
   alert("সঠিক তথ্য পূরণ করুন।");
   return;
  }
- const record={
-  id:editingId||String(Date.now()),
-  type:transactionType,title,amount,date,category,note
- };
+ if(!date.startsWith("2027-")){
+  alert("এই অ্যাপে ২০২৭ সালের তারিখ ব্যবহার করুন।");
+  return;
+ }
+ const record={id:editingId||String(Date.now()),type:transactionType,title,amount,date,category,note};
  if(editingId){
   transactions=transactions.map(t=>t.id===editingId?record:t);
  }else{
@@ -378,23 +386,186 @@ function deleteTransaction(id){
  persist();
  render();
 }
-function persist(){
- localStorage.setItem("sangsar_editable_2027",JSON.stringify(transactions));
+
+/* ক্যাটাগরি ব্যবস্থাপনা */
+function showCategoryType(type){
+ categoryViewType=type;
+ document.getElementById("catIncomeTab").classList.toggle("active",type==="income");
+ document.getElementById("catExpenseTab").classList.toggle("active",type==="expense");
+ renderCategories();
 }
-function navAction(action){
- if(action==="home"){
-  window.scrollTo({top:0,behavior:"smooth"});
+function renderCategories(){
+ const list=document.getElementById("categoryList");
+ const items=categories[categoryViewType]||[];
+ if(!items.length){
+  list.innerHTML='<div class="empty">কোনো ক্যাটাগরি নেই।</div>';
+  return;
  }
- if(action==="transactions"){
-  document.getElementById("transactionList").scrollIntoView({behavior:"smooth"});
+ list.innerHTML=items.map((name,index)=>`
+  <div class="category-row">
+   <div><strong>${escapeHTML(name)}</strong><div style="font-size:11px;color:#7b8791">${categoryViewType==="income"?"আয়ের ক্যাটাগরি":"ব্যয়ের ক্যাটাগরি"}</div></div>
+   <div class="category-actions">
+    <button onclick="editCategory(${index})">✏️</button>
+    <button onclick="deleteCategory(${index})">🗑️</button>
+   </div>
+  </div>`).join("");
+}
+function openCategoryModal(){
+ editingCategoryIndex=null;
+ document.getElementById("categoryModalTitle").textContent="নতুন ক্যাটাগরি";
+ document.getElementById("newCategoryType").value=categoryViewType;
+ document.getElementById("newCategoryType").disabled=false;
+ document.getElementById("newCategoryName").value="";
+ document.getElementById("categoryModal").classList.add("show");
+}
+function editCategory(index){
+ editingCategoryIndex=index;
+ document.getElementById("categoryModalTitle").textContent="ক্যাটাগরির নাম পরিবর্তন";
+ document.getElementById("newCategoryType").value=categoryViewType;
+ document.getElementById("newCategoryType").disabled=true;
+ document.getElementById("newCategoryName").value=categories[categoryViewType][index];
+ document.getElementById("categoryModal").classList.add("show");
+}
+function closeCategoryModal(){
+ document.getElementById("categoryModal").classList.remove("show");
+}
+function saveCategory(){
+ const type=document.getElementById("newCategoryType").value;
+ const name=document.getElementById("newCategoryName").value.trim();
+ if(!name){
+  alert("ক্যাটাগরির নাম লিখুন।");
+  return;
  }
- if(action==="backup"){
-  exportBackup();
+ const list=categories[type];
+ if(list.some((c,i)=>c===name&&i!==editingCategoryIndex)){
+  alert("এই নামে ক্যাটাগরি আগে থেকেই আছে।");
+  return;
  }
+ if(editingCategoryIndex!==null){
+  const oldName=list[editingCategoryIndex];
+  list[editingCategoryIndex]=name;
+  transactions.forEach(t=>{
+   if(t.type===type&&t.category===oldName)t.category=name;
+  });
+  if(type==="expense"){
+   Object.keys(budgets).forEach(key=>{
+    const parts=key.split("|");
+    if(parts[1]===oldName){
+     const newKey=parts[0]+"|"+name;
+     budgets[newKey]=budgets[key];
+     delete budgets[key];
+    }
+   });
+  }
+ }else{
+  list.push(name);
+ }
+ persist();
+ persistCategories();
+ persistBudgets();
+ closeCategoryModal();
+ renderCategories();
+ render();
+ renderBudgets();
+}
+function deleteCategory(index){
+ const name=categories[categoryViewType][index];
+ const used=transactions.some(t=>t.type===categoryViewType&&t.category===name);
+ if(used){
+  alert("এই ক্যাটাগরিতে আগের লেনদেন রয়েছে। আগে সেই লেনদেনগুলোর ক্যাটাগরি পরিবর্তন করুন।");
+  return;
+ }
+ if(!confirm("“"+name+"” ক্যাটাগরিটি মুছে ফেলবেন?"))return;
+ categories[categoryViewType].splice(index,1);
+ if(categoryViewType==="expense"){
+  Object.keys(budgets).forEach(key=>{
+   if(key.endsWith("|"+name))delete budgets[key];
+  });
+ }
+ persistCategories();
+ persistBudgets();
+ renderCategories();
+ renderBudgets();
+}
+
+/* মাসিক বাজেট */
+let activeBudgetCategory="";
+function budgetKey(category){
+ return selectedMonth+"|"+category;
+}
+function renderBudgets(){
+ const box=document.getElementById("budgetList");
+ const expenseCategories=categories.expense||[];
+ if(!expenseCategories.length){
+  box.innerHTML='<div class="empty">আগে একটি ব্যয় ক্যাটাগরি তৈরি করুন।</div>';
+  return;
+ }
+ box.innerHTML=expenseCategories.map(name=>{
+  const spent=currentMonthTransactions()
+   .filter(t=>t.type==="expense"&&t.category===name)
+   .reduce((sum,t)=>sum+Number(t.amount),0);
+  const budget=Number(budgets[budgetKey(name)]||0);
+  const percent=budget>0?Math.min(100,spent/budget*100):0;
+  const over=budget>0&&spent>budget;
+  return `<div class="budget-item">
+   <div class="budget-top">
+    <div class="budget-name">🛒 ${escapeHTML(name)}</div>
+    <button class="secondary-btn" onclick="openBudgetModal('${escapeHTML(name).replace(/'/g,"&#39;")}')">বাজেট সেট করুন</button>
+   </div>
+   <div class="budget-numbers">
+    ${budget>0?`বাজেট: ${money(budget)} | খরচ: ${money(spent)}<br> ${over?`<span class="warning">⚠️ বাজেটের চেয়ে ${money(spent-budget)} বেশি খরচ হয়েছে</span>`:`অবশিষ্ট: ${money(budget-spent)}`}`:`এখনো বাজেট নির্ধারণ করা হয়নি | খরচ: ${money(spent)}`}
+   </div>
+   ${budget>0?`<div class="progress"><div class="progress-bar ${over?"over":""}" style="width:${percent}%"></div></div>`:""}
+  </div>`;
+ }).join("");
+}
+function openBudgetModal(name){
+ activeBudgetCategory=name;
+ document.getElementById("budgetCategoryName").textContent=name+" — "+months[selectedMonth];
+ document.getElementById("budgetAmount").value=budgets[budgetKey(name)]||"";
+ document.getElementById("budgetModal").classList.add("show");
+}
+function closeBudgetModal(){
+ document.getElementById("budgetModal").classList.remove("show");
+}
+function saveBudget(){
+ const amount=document.getElementById("budgetAmount").value;
+ if(amount===""||Number(amount)<0||!Number.isFinite(Number(amount))){
+  alert("সঠিক বাজেটের পরিমাণ লিখুন।");
+  return;
+ }
+ budgets[budgetKey(activeBudgetCategory)]=Number(amount);
+ persistBudgets();
+ closeBudgetModal();
+ renderBudgets();
+}
+
+/* পেজ ও ব্যাকআপ */
+function navAction(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ if(page==="home"){
+  document.getElementById("homePage").classList.add("active");
+  document.getElementById("navHome").classList.add("active");
+ }else if(page==="categories"){
+  document.getElementById("categoryPage").classList.add("active");
+  document.getElementById("navCategories").classList.add("active");
+  renderCategories();
+  renderBudgets();
+ }else if(page==="backup"){
+  document.getElementById("backupPage").classList.add("active");
+  document.getElementById("navBackup").classList.add("active");
+ }
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 function exportBackup(){
- const data=JSON.stringify(transactions,null,2);
- const blob=new Blob([data],{type:"application/json"});
+ const data={
+  transactions:transactions,
+  categories:categories,
+  budgets:budgets,
+  backupDate:new Date().toISOString()
+ };
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
  const url=URL.createObjectURL(blob);
  const a=document.createElement("a");
  a.href=url;
@@ -403,19 +574,12 @@ function exportBackup(){
  URL.revokeObjectURL(url);
 }
 function showInfo(){
- alert("সংসার হিসাব ২০২৭ Editable\\n\\nএই সংস্করণে আয় ও ব্যয় যোগ, সম্পাদনা ও মুছে ফেলা যাবে। ডাটা এই ব্রাউজারের Local Storage-এ সংরক্ষিত থাকবে।");
+ alert("সংসার হিসাব ২০২৭ Editable\n\nআয়-ব্যয় যোগ, সম্পাদনা, ক্যাটাগরি ব্যবস্থাপনা এবং মাসিক বাজেট নির্ধারণ করা যাবে। তথ্য এই ব্রাউজারের Local Storage-এ সংরক্ষিত থাকে। নিয়মিত ব্যাকআপ রাখুন।");
 }
 
 renderMonths();
 setType("expense");
 render();
-
-if("serviceWorker" in navigator){
- window.addEventListener("load",()=>{
-  navigator.serviceWorker.register("./service-worker.js")
-  .catch(err=>console.error("Service Worker:",err));
- });
-}
 </script>
 </body>
 </html>
