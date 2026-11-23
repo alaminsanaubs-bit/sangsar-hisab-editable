@@ -1,0 +1,14 @@
+
+{
+  "name": "সংসার হিসাব ২০২৭ Editable",
+  "short_name": "সংসার হিসাব",
+  "description": "সম্পূর্ণ সম্পাদনযোগ্য পারিবারিক আয় ব্যয়ের হিসাব",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f6f8",
+  "theme_color": "#087f5b",
+  "lang": "bn",
+  "icons": []
+}
