@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#087f5b">
+<title>সংসার হিসাব ২০২৭</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#f3f6f8;color:#172b3a;
+ font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:600px;margin:auto;min-height:100vh;padding-bottom:85px}
+.header{
+ background:linear-gradient(135deg,#087f5b,#10a46f);
+ color:white;padding:23px 18px 25px;
+ border-radius:0 0 24px 24px;
+}
+.header-top{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{font-size:35px}
+.header h1{font-size:21px;margin:0}
+.header p{font-size:12px;margin:5px 0 0;opacity:.9}
+.header button{background:#ffffff22;border:0;color:white;border-radius:12px;padding:10px}
+.content{padding:15px}
+.card{
+ background:white;border-radius:17px;padding:16px;
+ margin-bottom:13px;box-shadow:0 3px 12px #00000008;
+}
+.hero{
+ background:linear-gradient(135deg,#087f5b,#10a46f);
+ color:white;padding:20px;border-radius:20px;margin-bottom:14px;
+}
+.hero small{opacity:.9}
+.hero h2{font-size:29px;margin:8px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{padding:16px;border-radius:17px;min-height:100px}
+.stat small{display:block;font-size:13px;margin-bottom:8px}
+.stat strong{font-size:20px}
+.green{background:#e0f7ed;color:#087f5b}
+.red{background:#ffe9e9;color:#c0392b}
+.blue{background:#e8f0ff;color:#275ca8}
+.orange{background:#fff1dc;color:#a45a08}
+.section-title{
+ display:flex;justify-content:space-between;align-items:center;
+ margin:17px 0 12px;font-size:17px;font-weight:bold
+}
+.section-title small{font-size:12px;color:#087f5b}
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.month{
+ border:1px solid #dce5ed;background:white;padding:12px 5px;
+ border-radius:12px;text-align:center;font-size:14px;
+}
+.month.active{background:#087f5b;color:white;border-color:#087f5b}
+.transaction{
+ display:flex;align-items:center;gap:12px;padding:13px 0;
+ border-bottom:1px solid #edf1f4;
+}
+.transaction:last-child{border-bottom:0}
+.tx-icon{
+ width:43px;height:43px;border-radius:13px;background:#eef5f2;
+ display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.tx-info{flex:1;min-width:0}
+.tx-info strong{display:block;font-size:14px}
+.tx-info small{color:#72808c;font-size:12px}
+.tx-amount{text-align:right;font-weight:bold}
+.tx-amount.expense{color:#d64545}
+.tx-amount.income{color:#087f5b}
+.actions{display:flex;gap:6px;margin-top:5px}
+.actions button{
+ border:0;background:#edf2f6;padding:5px 8px;border-radius:7px;font-size:12px
+}
+.add-btn{
+ position:fixed;bottom:75px;right:max(20px,calc(50% - 280px));
+ width:58px;height:58px;border:0;border-radius:50%;
+ background:#087f5b;color:white;font-size:29px;
+ box-shadow:0 5px 16px #087f5b44;
+}
+.nav{
+ position:fixed;bottom:0;left:0;right:0;background:white;
+ border-top:1px solid #e5eaf0;display:flex;justify-content:center;
+ z-index:5;
+}
+.nav-inner{width:100%;max-width:600px;display:flex}
+.nav button{
+ flex:1;border:0;background:white;padding:12px 3px 10px;
+ color:#75818d;font-size:11px;
+}
+.nav button span{display:block;font-size:21px;margin-bottom:4px}
+.nav button.active{color:#087f5b;font-weight:bold}
+.modal{
+ display:none;position:fixed;inset:0;background:#0007;z-index:10;
+ align-items:flex-end;justify-content:center;
+}
+.modal.show{display:flex}
+.modal-box{
+ background:white;width:100%;max-width:600px;
+ border-radius:24px 24px 0 0;padding:22px;
+ max-height:90vh;overflow:auto;
+}
+.modal-box h2{margin:0 0 20px}
+label{display:block;font-size:14px;font-weight:bold;margin:14px 0 6px}
+input,select{
+ width:100%;padding:13px;border:1px solid #d6e0e8;
+ border-radius:12px;background:#f8fafc;color:#172b3a;
+}
+.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.type-toggle button{
+ padding:13px;border:1px solid #dce5ed;border-radius:12px;background:white;
+}
+.type-toggle button.active{background:#087f5b;color:white}
+.save{
+ width:100%;background:#087f5b;color:white;border:0;border-radius:13px;
+ padding:15px;margin-top:20px;font-weight:bold;
+}
+.cancel{
+ width:100%;background:#edf2f6;border:0;border-radius:13px;
+ padding:13px;margin-top:10px;
+}
+.empty{text-align:center;padding:30px 10px;color:#75818d}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header class="header">
+ <div class="header-top">
+  <div class="brand">
+   <div class="logo">🏠</div>
+   <div>
+    <h1>সংসার হিসাব ২০২৭</h1>
+    <p>পরিবারের আয়, ব্যয় ও বাজেট</p>
+   </div>
+  </div>
+  <button onclick="showInfo()">ⓘ</button>
+ </div>
+</header>
+
+<div class="content">
+
+<div class="section-title">
+ <span>📅 মাস নির্বাচন</span>
+ <small>২০২৭ সাল</small>
+</div>
+
+<div class="months" id="months"></div>
+
+<div class="section-title"><span>📊 মাসিক হিসাব</span></div>
+
+<div class="hero">
+ <small id="selectedMonth">জানুয়ারি</small>
+ <h2 id="balance">৳ ০</h2>
+ <small>মাসের অবশিষ্ট টাকা</small>
+</div>
+
+<div class="grid">
+ <div class="stat green">
+  <small>💰 মোট আয়</small>
+  <strong id="income">৳ ০</strong>
+ </div>
+ <div class="stat red">
+  <small>🛒 মোট ব্যয়</small>
+  <strong id="expense">৳ ০</strong>
+ </div>
+ <div class="stat blue">
+  <small>📥 লেনদেন</small>
+  <strong id="count">০ টি</strong>
+ </div>
+ <div class="stat orange">
+  <small>📆 মাস</small>
+  <strong id="monthLabel">জানুয়ারি</strong>
+ </div>
+</div>
+
+<div class="section-title">
+ <span>📋 লেনদেন তালিকা</span>
+ <small id="txCount">০ টি</small>
+</div>
+
+<div class="card" id="transactionList"></div>
+
+</div>
+</div>
+
+<button class="add-btn" onclick="openModal()" aria-label="নতুন লেনদেন">+</button>
+
+<div class="nav">
+ <div class="nav-inner">
+  <button class="active" onclick="navAction('home')"><span>🏠</span>হোম</button>
+  <button onclick="navAction('transactions')"><span>📋</span>লেনদেন</button>
+  <button onclick="openModal()"><span>➕</span>যোগ করুন</button>
+  <button onclick="navAction('backup')"><span>💾</span>ব্যাকআপ</button>
+ </div>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<h2 id="modalTitle">নতুন লেনদেন</h2>
+
+<div class="type-toggle">
+ <button id="incomeBtn" onclick="setType('income')">💰 জমা / আয়</button>
+ <button id="expenseBtn" onclick="setType('expense')">🛒 খরচ</button>
+</div>
+
+<label>তারিখ</label>
+<input type="date" id="date">
+
+<label>পণ্য / বিবরণ</label>
+<input type="text" id="title" placeholder="যেমন: বাজার, বেতন">
+
+<label>ক্যাটাগরি</label>
+<select id="category"></select>
+
+<label>পরিমাণ (টাকা)</label>
+<input type="number" id="amount" placeholder="টাকার পরিমাণ" min="0" step="0.01">
+
+<label>অতিরিক্ত বিবরণ</label>
+<input type="text" id="note" placeholder="ঐচ্ছিক">
+
+<button class="save" onclick="saveTransaction()">💾 সংরক্ষণ করুন</button>
+<button class="cancel" onclick="closeModal()">বাতিল</button>
+</div>
+</div>
+
+<script>
+const months=[
+ "জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন",
+ "জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"
+];
+
+const categories={
+ income:["বেতন","ব্যবসা","অন্যান্য আয়","বোনাস","অন্যান্য"],
+ expense:["খাদ্য","বাড়ি","যাতায়াত","বিদ্যুৎ-গ্যাস-পানি","চিকিৎসা",
+ "শিক্ষা","পোশাক","ঋণ","অন্যান্য"]
+};
+
+let selectedMonth=0;
+let transactionType="expense";
+let editingId=null;
+let transactions=JSON.parse(localStorage.getItem("sangsar_editable_2027")||"[]");
+
+function money(n){
+ return "৳ "+Number(n||0).toLocaleString("bn-BD");
+}
+
+function bn(n){
+ return Number(n||0).toLocaleString("bn-BD");
+}
+
+function renderMonths(){
+ const el=document.getElementById("months");
+ el.innerHTML=months.map((m,i)=>
+ `<button class="month ${i===selectedMonth?"active":""}" onclick="selectMonth(${i})">${m}</button>`
+ ).join("");
+}
+
+function selectMonth(i){
+ selectedMonth=i;
+ renderMonths();
+ render();
+}
+
+function currentMonthTransactions(){
+ return transactions.filter(t=>Number(t.date.split("-")[1])-1===selectedMonth);
+}
+
+function render(){
+ const list=currentMonthTransactions();
+ const inc=list.filter(t=>t.type==="income").reduce((s,t)=>s+Number(t.amount),0);
+ const exp=list.filter(t=>t.type==="expense").reduce((s,t)=>s+Number(t.amount),0);
+
+ document.getElementById("selectedMonth").textContent=months[selectedMonth]+" মাস";
+ document.getElementById("monthLabel").textContent=months[selectedMonth];
+ document.getElementById("income").textContent=money(inc);
+ document.getElementById("expense").textContent=money(exp);
+ document.getElementById("balance").textContent=money(inc-exp);
+ document.getElementById("count").textContent=bn(list.length)+" টি";
+ document.getElementById("txCount").textContent=bn(list.length)+" টি";
+
+ const box=document.getElementById("transactionList");
+
+ if(!list.length){
+  box.innerHTML='<div class="empty">📝<br><br>এই মাসে কোনো লেনদেন নেই।<br>নিচের + বাটনে চাপ দিয়ে যোগ করুন।</div>';
+  return;
+ }
+
+ list.sort((a,b)=>b.date.localeCompare(a.date));
+
+ box.innerHTML=list.map(t=>{
+  const isIncome=t.type==="income";
+  const date=new Date(t.date+"T00:00:00").toLocaleDateString("bn-BD");
+  return `
+  <div class="transaction">
+   <div class="tx-icon">${isIncome?"💰":"🛒"}</div>
+   <div class="tx-info">
+    <strong>${escapeHTML(t.title)}</strong>
+    <small>${escapeHTML(t.category)} • ${date}</small>
+    ${t.note?`<small>${escapeHTML(t.note)}</small>`:""}
+    <div class="actions">
+     <button onclick="editTransaction('${t.id}')">✏️ সম্পাদনা</button>
+     <button onclick="deleteTransaction('${t.id}')">🗑️ মুছুন</button>
+    </div>
+   </div>
+   <div class="tx-amount ${isIncome?"income":"expense"}">
+    ${isIncome?"+":"-"}${money(t.amount)}
+   </div>
+  </div>`;
+ }).join("");
+}
+
+function escapeHTML(str){
+ return String(str||"").replace(/[&<>"']/g,m=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[m]));
+}
+
+function setType(type){
+ transactionType=type;
+ document.getElementById("incomeBtn").classList.toggle("active",type==="income");
+ document.getElementById("expenseBtn").classList.toggle("active",type==="expense");
+
+ const categoriesList=categories[type];
+ document.getElementById("category").innerHTML=
+ categoriesList.map(c=>`<option>${c}</option>`).join("");
+}
+
+function openModal(){
+ editingId=null;
+ document.getElementById("modalTitle").textContent="নতুন লেনদেন";
+ document.getElementById("title").value="";
+ document.getElementById("amount").value="";
+ document.getElementById("note").value="";
+ document.getElementById("date").value=`2027-${String(selectedMonth+1).padStart(2,"0")}-${String(new Date().getDate()).padStart(2,"0")}`;
+ setType("expense");
+ document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
+
+function saveTransaction(){
+ const title=document.getElementById("title").value.trim();
+ const amount=Number(document.getElementById("amount").value);
+ const date=document.getElementById("date").value;
+ const category=document.getElementById("category").value;
+ const note=document.getElementById("note").value.trim();
+
+ if(!title||!amount||amount<=0||!date){
+  alert("সঠিক তথ্য পূরণ করুন।");
+  return;
+ }
+
+ const record={
+  id:editingId||String(Date.now()),
+  type:transactionType,
+  title,amount,date,category,note
+ };
+
+ if(editingId){
+  transactions=transactions.map(t=>t.id===editingId?record:t);
+ }else{
+  transactions.push(record);
+ }
+
+ persist();
+ selectedMonth=Number(date.split("-")[1])-1;
+ renderMonths();
+ render();
+ closeModal();
+}
+
+function editTransaction(id){
+ const t=transactions.find(x=>x.id===id);
+ if(!t)return;
+
+ editingId=id;
+ document.getElementById("modalTitle").textContent="লেনদেন সম্পাদনা";
+ document.getElementById("title").value=t.title;
+ document.getElementById("amount").value=t.amount;
+ document.getElementById("date").value=t.date;
+ document.getElementById("note").value=t.note||"";
+ setType(t.type);
+ document.getElementById("category").value=t.category;
+ document.getElementById("modal").classList.add("show");
+}
+
+function deleteTransaction(id){
+ if(!confirm("এই লেনদেনটি কি মুছে ফেলবেন?"))return;
+ transactions=transactions.filter(t=>t.id!==id);
+ persist();
+ render();
+}
+
+function persist(){
+ localStorage.setItem("sangsar_editable_2027",JSON.stringify(transactions));
+}
+
+function navAction(action){
+ if(action==="home"){
+  window.scrollTo({top:0,behavior:"smooth"});
+ }
+ if(action==="transactions"){
+  document.getElementById("transactionList").scrollIntoView({behavior:"smooth"});
+ }
+ if(action==="backup"){
+  exportBackup();
+ }
+}
+
+function exportBackup(){
+ const data=JSON.stringify(transactions,null,2);
+ const blob=new Blob([data],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="sangsar-hisab-2027-backup.json";
+ a.click();
+ URL.revokeObjectURL(url);
+}
+
+function showInfo(){
+ alert("সংসার হিসাব ২০২৭ Editable\\n\\nএই সংস্করণে আয় ও ব্যয় যোগ, সম্পাদনা ও মুছে ফেলা যাবে। ডাটা এই ব্রাউজারের Local Storage-এ সংরক্ষিত থাকবে।");
+}
+
+renderMonths();
+setType("expense");
+render();
+</script>
+</body>
+</html>
